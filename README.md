@@ -38,13 +38,19 @@ PM> Install-Package log4net
 
 Add following code into Global.asax.cs file on "Application_Start()" event.
 
-##log4net.Config.XmlConfigurator.Configure();
+```C#
+log4net.Config.XmlConfigurator.Configure();
+```
  
 #Step 3. Register log4net in configSections
 
 Add following code into configSections in web.config
 
-##<section name="log4net" type="log4net.Config.Log4NetConfigurationSectionHandler, log4net" />
+```C#
+
+<section name="log4net" type="log4net.Config.Log4NetConfigurationSectionHandler, log4net" />
+
+```
 
 #Step 4. Use log4net configuration in web.config sections
 
