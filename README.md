@@ -11,40 +11,46 @@ Home page of log4net- http://logging.apache.org/log4net/index.html
 
 Following is steps to save log4net log into database
 
-1. Add Log4net.dll into your project
-2. Add log4net into Global.asax.cs
-3. Register log4net in configSections
-4. Use log4net configuration in web.config sections
-5. Create a database and table to save log into Sql server. I am creating "Log4NetTest" database and "AppLog" table to save log into database
-6. Use following Log4net settings in your controller, where you want use log4net
+##1. Add Log4net.dll into your project
+##2. Add log4net into Global.asax.cs
+##3. Register log4net in configSections
+##4. Use log4net configuration in web.config sections
+##5. Create a database and table to save log into Sql server. I am creating "Log4NetTest" database and "AppLog" table to save log into database
+##6. Use following Log4net settings in your controller, where you want use log4net
 
 #Step 1 . Add Log4net.dll into your project
  
 Add log4net "log4net.dll" library into your project. you can download log4net binary from following URL
+
 https://logging.apache.org/log4net/download_log4net.cgi
 
 Its contains different bin file for different .net version. You can add log4net.dll according to your requirement and .net version.
+
 Or 
 
 Package Manager- You can install log4net via package manager
 Go to Tools>>NuGet Package Manager >> Package Manager
 then run 
+
 PM> Install-Package log4net
 
 #Step 2. Add log4net into Global.asax.cs
 
 Add following code into Global.asax.cs file on "Application_Start()" event.
-log4net.Config.XmlConfigurator.Configure();
+
+##log4net.Config.XmlConfigurator.Configure();
  
 #Step 3. Register log4net in configSections
 
 Add following code into configSections in web.config
-<section name="log4net" type="log4net.Config.Log4NetConfigurationSectionHandler, log4net" />
+
+##<section name="log4net" type="log4net.Config.Log4NetConfigurationSectionHandler, log4net" />
 
 #Step 4. Use log4net configuration in web.config sections
 
 Add following code below configSections in web.config
  
+```c#
 <log4net>
     <appender name="RollingLogFileAppender" type="log4net.Appender.RollingFileAppender">
       <file value="C:\\log.txt" />
@@ -112,12 +118,14 @@ Add following code below configSections in web.config
       <appender-ref ref="RollingLogFileAppender"  />   
      <appender-ref ref="AdoNetAppender" />             
     </root>
-  </log4net>
+  </log4net> 
+  ```
 
 #Step 5. Create a database and table to save log into sql server. I am creating "Log4NetTest" database and "AppLog" table to save log into database
  
  --Sql Script for save log4net log into sql server database
 
+```Sql
 Create database Log4NetTest
 
 Use Log4NetTest
@@ -132,9 +140,12 @@ CREATE TABLE [dbo].[AppLog](
 	[Exception] [varchar](max) NULL
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
  
-Select * from AppLog
+Select * from AppLog 
+```
 
 #Step 6. Use following Log4net settings in your controller, where you want use log4net
+
+```C#
 
 private static log4net.ILog Log { get; set; }
 
@@ -145,6 +156,7 @@ log.Warn("Warn message");
 log.Error("Error message");
 log.Fatal("Fatal message");
 
+```
 
 Thanks
 www.codeandyou.com
